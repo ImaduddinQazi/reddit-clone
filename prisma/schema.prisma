@@ -21,3 +21,8 @@ model User {
   image String?
   createdAt DateTime @default(now())
 }
+model Community {}
+model CommunityMember {}
+model Post {}
+model Comment {}
+model Vote {}
