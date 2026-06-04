@@ -21,8 +21,35 @@ model User {
   image String?
   createdAt DateTime @default(now())
 }
-model Community {}
-model CommunityMember {}
-model Post {}
-model Comment {}
-model Vote {}
+model Community {
+  community_id Int @id @default(autoincrement())
+  user_id Int
+  name String
+  description String
+  createdAt DateTime @default(now())
+}
+model CommunityMember {
+  communityMember_id Int @id @default(autoincrement())
+  community_id Int
+  User_id int
+}
+model Post {
+  post_id Int @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  name String
+  image String?
+  description String?
+  createdAt DateTime @default(now())
+}
+model Comment {
+  comment_id Int @id @default(autoincrement())
+  User_id Int
+  parent_comment_id Int
+  createdAt DateTime @default(now())
+}
+model Vote {
+  vote_id Int @id @default(autoincrement())
+  User_id Int
+  vote_count Int
+  createdAt @default(now())
+}
