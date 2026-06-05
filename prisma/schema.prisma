@@ -22,19 +22,19 @@ model User {
   createdAt DateTime @default(now())
 }
 model Community {
-  community_id Int @id @default(autoincrement())
-  user_id Int
+  id Int @id @default(autoincrement())
+  userId Int
   name String
   description String
   createdAt DateTime @default(now())
 }
 model CommunityMember {
   communityMember_id Int @id @default(autoincrement())
-  community_id Int
-  User_id int
+  id Int
+  userId int
 }
 model Post {
-  post_id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   user   User @relation(fields: [userId], references: [id])
   name String
   image String?
@@ -43,13 +43,14 @@ model Post {
 }
 model Comment {
   comment_id Int @id @default(autoincrement())
-  User_id Int
-  parent_comment_id Int
+  userId Int
+  content String
+  parent_comment_id Int?
   createdAt DateTime @default(now())
 }
 model Vote {
-  vote_id Int @id @default(autoincrement())
-  User_id Int
-  vote_count Int
-  createdAt @default(now())
+  id Int @id @default(autoincrement())
+  userId Int
+  voteCount Int
+  createdAt DateTime @default(now())
 }
