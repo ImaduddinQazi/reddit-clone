@@ -20,6 +20,11 @@ model User {
   name String
   image String?
   createdAt DateTime @default(now())
+  posts            Post[]
+  comments         Comment[]
+  votes            Vote[]
+  communities      Community[]
+  communityMembers CommunityMember[]
 }
 model Community {
   id Int @id @default(autoincrement())
@@ -27,30 +32,37 @@ model Community {
   name String
   description String
   createdAt DateTime @default(now())
+  members CommunityMember[]
+  posts   Post[]
 }
 model CommunityMember {
-  communityMember_id Int @id @default(autoincrement())
-  id Int
-  userId int
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  communityId Int
+  joinedAt    DateTime @default(now())
 }
 model Post {
   id Int @id @default(autoincrement())
+  userId  Int
   user   User @relation(fields: [userId], references: [id])
-  name String
+  title  String
   image String?
   description String?
   createdAt DateTime @default(now())
+  comments Comment[]
+  votes    Vote[]
 }
 model Comment {
-  comment_id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   userId Int
   content String
-  parent_comment_id Int?
+  parentCommentId Int?
   createdAt DateTime @default(now())
 }
 model Vote {
   id Int @id @default(autoincrement())
   userId Int
-  voteCount Int
+  type String
+  postId Int
   createdAt DateTime @default(now())
 }
