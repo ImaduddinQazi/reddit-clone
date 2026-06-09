@@ -10,7 +10,6 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url=env("DATABASE_URL")
 }
 
 model User {
@@ -62,6 +61,8 @@ model Comment {
   userId Int
   user User @relation(fields: [userId], references: [id])
   content String
+  postId  Int
+  post    Post @relation(fields: [postId], references: [id])
   parentCommentId Int?
   createdAt DateTime @default(now())
 }
