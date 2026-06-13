@@ -1,6 +1,8 @@
-export default async function POST(String email, String password, String name,){
-    const data=await prisma.put();
-    return Response.json({
-        "message":"data added successfully"
-    });
+import prisma from "@/lib/prisma";
+
+export async function POST(request: Request){
+    const body=await request.json();
+    return prisma.user.create({
+        data: {} //need to update
+    })
 }
