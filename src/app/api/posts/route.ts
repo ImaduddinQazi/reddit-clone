@@ -5,13 +5,14 @@ export async function GET(){
     return Response.json(data);
 }
 export async function POST(request: Request){
-    const body = await prisma.post.create({
+    const body=await request.json();
+    const post = await prisma.post.create({
         data:{
-            userId: prisma.userId,
-            title: prisma.title,
-            image: prisma.image,
-            description: prisma.description,
-            communityId: prisma.communityId
+            userId: body.userId,
+            title: body.title,
+            image: body.image,
+            description: body.description,
+            communityId: body.communityId
         }
     })
     
