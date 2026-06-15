@@ -7,6 +7,11 @@ export async function POST(request: Request){
             name:body.name,
             email: body.email,
             password: body.password
-        } //need to update
+        }
     }))
+}
+
+export async function GET(){
+    const data = await prisma.user.findMany();
+    return Response.json(data);
 }
